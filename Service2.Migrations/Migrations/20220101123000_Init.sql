@@ -1,0 +1,1 @@
+create table dbo.Journal(id int primary key, data nvarchar(max) not null);
