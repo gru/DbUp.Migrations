@@ -1,0 +1,1 @@
+create table dbo.DocumentTypes(id int primary key, name nvarchar(512) not null);

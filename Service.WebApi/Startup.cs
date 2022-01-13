@@ -1,4 +1,5 @@
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using DbUp;
 using Microsoft.AspNetCore.Builder;
@@ -27,8 +28,14 @@ namespace Service.WebApi
             
             EnsureDatabase.For.SqlDatabase(connectionString);
             DeployChanges.To.SqlDatabase(connectionString)
-                .WithScriptsFromFileSystem(
-                    Path.Combine(Path.GetDirectoryName(assembly.Location), "Migrations"))
+                .WithScriptsEmbeddedInAssemblies(
+                    Directory.GetFiles(Path
+                        .GetDirectoryName(assembly.Location))
+                        .Where(f => Path.GetExtension(f).Equals(".dll") && 
+                                    Path.GetFileNameWithoutExtension(f).EndsWith(".Migrations"))
+                        .Select(Assembly.LoadFrom)
+                        .Union(new[] { assembly })
+                        .ToArray())
                 .Build()
                 .PerformUpgrade();
         }

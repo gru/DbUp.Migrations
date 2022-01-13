@@ -10,9 +10,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Content Include="Migrations/**/*.sql">
-            <PackageCopyToOutput>true</PackageCopyToOutput>
-        </Content>
+        <EmbeddedResource Include="Migrations/**/*.sql"/>
     </ItemGroup>
     
 </Project>

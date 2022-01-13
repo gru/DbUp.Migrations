@@ -8,11 +8,9 @@
         <Company>My</Company>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     </PropertyGroup>
-
-    <ItemGroup>
-        <Content Include="Migrations/**/*.sql">
-            <PackageCopyToOutput>true</PackageCopyToOutput>
-        </Content>
-    </ItemGroup>
     
+    <ItemGroup>
+        <EmbeddedResource Include="Migrations/**/*.sql"/>
+    </ItemGroup>
+
 </Project>

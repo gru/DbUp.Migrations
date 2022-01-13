@@ -1,1 +1,1 @@
-alter table dbo.Messages add column priority int not null;
+alter table dbo.Messages add priority int not null;

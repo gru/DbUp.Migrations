@@ -6,9 +6,10 @@
 
     <ItemGroup>
         <PackageReference Include="dbup" Version="4.5.0" />
-        <PackageReference Include="Service.Migrations" Version="1.0.7"/>
-        <PackageReference Include="Service2.Migrations" Version="1.0.2"/>
-        <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+        <PackageReference Include="Service.Migrations" Version="1.0.13" />
+        <PackageReference Include="Service2.Migrations" Version="1.0.8" />
     </ItemGroup>
-
+    <ItemGroup>
+        <EmbeddedResource Include="Migrations/**/*.sql"/>
+    </ItemGroup>
 </Project>
