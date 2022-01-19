@@ -12,11 +12,21 @@ function PushPackages([string] $dir, [string] $filter) {
   }  
 }
 
+function DeletePackages([string] $dir) {
+  $packages = Get-ChildItem $dir '*.nupkg' -Recurse
+  foreach ($package in $packages) {
+    "Removing package $package"
+    Remove-Item $package 
+  }  
+}
+
 $Server = 'http://localhost'
 $ApiKey = '112233'
 
-BuildProjects $PSScriptRoot "Service.Migrations.csproj" "/p:Version=1.0.7"
+DeletePackages $PSScriptRoot
+
+BuildProjects $PSScriptRoot "Service.Migrations.csproj" "/p:Version=1.0.0"
 PushPackages $PSScriptRoot "Service.Migrations.*.nupkg"
 
-BuildProjects $PSScriptRoot "Service2.Migrations.csproj" "/p:Version=1.0.2"
+BuildProjects $PSScriptRoot "Service2.Migrations.csproj" "/p:Version=1.0.0"
 PushPackages $PSScriptRoot "Service2.Migrations.*.nupkg"

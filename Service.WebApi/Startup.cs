@@ -27,14 +27,14 @@ namespace Service.WebApi
         {
             services.AddControllers();
 
-            var assembly = Assembly.GetEntryAssembly();
+            var assembly = Assembly.GetEntryAssembly()!;
             var connectionString = Configuration.GetConnectionString("Default");
-            
+
             EnsureDatabase.For.SqlDatabase(connectionString);
             DeployChanges.To.SqlDatabase(connectionString)
                 .WithScriptsEmbeddedInAssemblies(
                     Directory.GetFiles(Path
-                            .GetDirectoryName(assembly.Location))
+                            .GetDirectoryName(assembly.Location)!)
                         .Where(f => Path.GetExtension(f).Equals(".dll") && 
                                     Path.GetFileNameWithoutExtension(f).EndsWith(".Migrations"))
                         .Select(Assembly.LoadFrom)
